@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, {
   useAnimatedStyle,
-  useSharedValue,
   interpolate,
 } from "react-native-reanimated";
 import { useDrawerProgress } from "@react-navigation/drawer";
@@ -15,21 +14,19 @@ const AnimatedScreenWrapper: React.FC<Props> = ({ children }) => {
   const progress = useDrawerProgress() as Animated.SharedValue<number>;
 
   const animatedStyle = useAnimatedStyle(() => {
-    const scale = interpolate(progress.value, [0, 1], [1, 0.89]);
-    const rotate = interpolate(progress.value, [0, 1], [0, -10]);
+    const scale = interpolate(progress.value, [0, 1], [1, 0.9]);
+    const translateX = interpolate(progress.value, [0, 1], [0, 50]);
     const translateY = interpolate(progress.value, [0, 1], [0, 50]);
-    const translateX = interpolate(progress.value, [0, 1], [0, 30]);
-    const borderRadius = interpolate(progress.value, [0, 1], [0, 30]);
-  
+    const rotateZ = interpolate(progress.value, [0, 1], [0, -10]);
+
     return {
       transform: [
-        { scale }, 
-        { translateX }, 
-        { rotateZ: `${rotate}deg` },
-        { translateY }
+        { scale },
+        { translateX },
+        { translateY },
+        { rotateZ: `${rotateZ}deg` },
       ],
-      borderRadius,
-      overflow: "visible",
+      borderTopLeftRadius: 50,
     };
   });
 
@@ -47,11 +44,12 @@ export default AnimatedScreenWrapper;
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#241c2b", // Ensures purple background behind animation
+    backgroundColor: "#201c3e", 
+    overflow: "hidden", 
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff", // Foreground screen
-    overflow: "visible", // Prevents content from spilling out
+    backgroundColor: "#fff", 
+    overflow: "hidden",
   },
 });

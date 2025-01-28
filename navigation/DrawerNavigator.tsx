@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TabNavigator from "./TabNavigator";
 import CustomDrawerContent from "../components/CustomDrawerContent";
 import AnimatedScreenWrapper from "../components/AnimatedScreenWrapper";
+import { Colors } from "../constants/Colors";
 
 export type DrawerParamList = {
   Tabs: undefined;
@@ -12,37 +13,33 @@ export type DrawerParamList = {
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
 export default function DrawerNavigator() {
-  const insets = useSafeAreaInsets(); // Use device's safe area insets
+  const insets = useSafeAreaInsets();
 
   return (
     <Drawer.Navigator
-      // Provide your custom drawer content
       drawerContent={(props) => <CustomDrawerContent {...props} />}
-
       screenOptions={{
         drawerType: "slide",
         overlayColor: "transparent",
-
-        // The actual drawer box style
         drawerStyle: {
-          backgroundColor: "#241c2b",
+          backgroundColor: Colors.light.backgroundContainer,
           width: 150,
-          borderTopLeftRadius: 30,
         },
-
+        sceneStyle : {
+            overflow: "hidden",
+        },
         drawerContentContainerStyle: {
-            marginTop: insets.top,
-            marginBottom: insets.bottom,
+          marginTop: insets.top,
+          marginBottom: insets.bottom,
         },
-
-        // Colors
-        drawerActiveBackgroundColor: "#241c2b",
-        drawerActiveTintColor: "#fff",
-        drawerInactiveTintColor: "#fff",
-        drawerLabelStyle: { color: "#fff" },
       }}
     >
-      <Drawer.Screen name="Tabs" options={{ headerShown: false  }}>
+      <Drawer.Screen
+        name="Tabs"
+        options={{
+          headerShown: false, // Note := > Kept this OFF for better standardized UX on both iOS and Android
+        }}
+      >
         {(props) => (
           <AnimatedScreenWrapper {...props}>
             <TabNavigator />
