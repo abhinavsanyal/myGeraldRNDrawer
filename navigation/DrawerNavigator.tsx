@@ -30,11 +30,9 @@ export default function DrawerNavigator() {
           borderTopLeftRadius: 30,
         },
 
-        // This ensures we add safe-area padding at the top & bottom 
-        // so the drawer won't overlap the notch or home indicator
         drawerContentContainerStyle: {
-          paddingTop: insets.top,
-          paddingBottom: insets.bottom,
+            marginTop: insets.top,
+            marginBottom: insets.bottom,
         },
 
         // Colors
@@ -44,7 +42,7 @@ export default function DrawerNavigator() {
         drawerLabelStyle: { color: "#fff" },
       }}
     >
-      <Drawer.Screen name="Tabs" options={{ drawerLabel: "Home" }}>
+      <Drawer.Screen name="Tabs" options={{ headerShown: false  }}>
         {(props) => (
           <AnimatedScreenWrapper {...props}>
             <TabNavigator />

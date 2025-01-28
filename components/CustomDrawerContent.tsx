@@ -48,9 +48,9 @@ export default function CustomDrawerContent(props: DrawerContentComponentProps) 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1,               // Ensures it fills the drawer space
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 20,        // or 0 if you prefer
     backgroundColor: '#241c2b',
   },
   userName: {
