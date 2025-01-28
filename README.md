@@ -2,7 +2,7 @@
 
 A sleek and modern drawer navigation implementation featuring smooth animations, custom styling, and a native feel across platforms.
 
-![Demo Preview](assets/demo.mp4)
+![Demo Preview](https://youtube.com/shorts/gd62eBbCxXE?feature=share)
 
 ## ✨ Features
 
