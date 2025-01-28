@@ -1,13 +1,16 @@
 // screens/ContactScreen.tsx
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const ContactScreen = () => {
+export default function ContactScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Contact Screen</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Contact Screen test</Text>
     </View>
   );
-};
+}
 
-export default ContactScreen;
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  title: { fontSize: 20 },
+});
