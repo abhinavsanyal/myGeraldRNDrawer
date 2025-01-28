@@ -6,8 +6,6 @@ export default function CustomDrawerContent(props: DrawerContentComponentProps) 
   const { navigation } = props;
 
   return (
-    // Here, we just use a normal View. The parent SafeAreaView in DrawerNavigator 
-    // will ensure this content is below the notch.
     <View style={styles.container}>
       <Text style={styles.userName}>Beka</Text>
 
@@ -50,10 +48,10 @@ export default function CustomDrawerContent(props: DrawerContentComponentProps) 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,              // Fill the available safe area space
+    flex: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
-    backgroundColor: '#241c2b', // Match drawer background
+    backgroundColor: '#241c2b',
   },
   userName: {
     color: '#fff',

@@ -1,9 +1,9 @@
-import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import TabNavigator from './TabNavigator'; // Adjust import path as needed
-import CustomDrawerContent from '../components/CustomDrawerContent'; // Adjust path
-import AnimatedScreenWrapper from '../components/AnimatedScreenWrapper'; // Adjust path
+import React from "react";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import TabNavigator from "./TabNavigator";
+import CustomDrawerContent from "../components/CustomDrawerContent";
+import AnimatedScreenWrapper from "../components/AnimatedScreenWrapper";
 
 export type DrawerParamList = {
   Tabs: undefined;
@@ -12,44 +12,39 @@ export type DrawerParamList = {
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
 export default function DrawerNavigator() {
-  return (
-    // Provide SafeArea context to the entire app
-    <SafeAreaProvider>
-      <DrawerComponent />
-    </SafeAreaProvider>
-  );
-}
+  const insets = useSafeAreaInsets(); // Use device's safe area insets
 
-function DrawerComponent() {
   return (
     <Drawer.Navigator
-      // The critical part: wrap *all* your custom drawer content in a SafeAreaView
-      drawerContent={(props) => (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#241c2b' }}>
-          <CustomDrawerContent {...props} />
-        </SafeAreaView>
-      )}
+      // Provide your custom drawer content
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+
       screenOptions={{
-        drawerType: 'slide',
-        overlayColor: 'transparent',
-        // Keep the drawer’s background and width, but avoid forcing it behind the notch with flex:1
+        drawerType: "slide",
+        overlayColor: "transparent",
+
+        // The actual drawer box style
         drawerStyle: {
-          backgroundColor: '#241c2b',
-          width: 250,
-          borderTopLeftRadius: 20,
-          borderBottomLeftRadius: 20,
+          backgroundColor: "#241c2b",
+          width: 150,
+          borderTopLeftRadius: 30,
         },
-        drawerActiveBackgroundColor: '#241c2b',
-        drawerActiveTintColor: '#fff',
-        drawerInactiveTintColor: '#fff',
-        drawerLabelStyle: { color: '#fff' },
+
+        // This ensures we add safe-area padding at the top & bottom 
+        // so the drawer won't overlap the notch or home indicator
+        drawerContentContainerStyle: {
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+        },
+
+        // Colors
+        drawerActiveBackgroundColor: "#241c2b",
+        drawerActiveTintColor: "#fff",
+        drawerInactiveTintColor: "#fff",
+        drawerLabelStyle: { color: "#fff" },
       }}
     >
-      {/* Example drawer screen */}
-      <Drawer.Screen
-        name="Tabs"
-        options={{ drawerLabel: 'Home' }}
-      >
+      <Drawer.Screen name="Tabs" options={{ drawerLabel: "Home" }}>
         {(props) => (
           <AnimatedScreenWrapper {...props}>
             <TabNavigator />

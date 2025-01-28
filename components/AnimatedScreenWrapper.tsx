@@ -61,13 +61,15 @@ const AnimatedScreenWrapper: React.FC<Props> = ({ children }) => {
 
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(progress.value, [0, 1], [1, 0.85]);
-    const translateX = interpolate(progress.value, [0, 1], [0, 250]); // Moves right
-    const borderRadius = interpolate(progress.value, [0, 1], [0, 30]); // Smooth rounding
+    const rotate = interpolate(progress.value, [0, 1], [0, -10]); // deg
+    const translateX = interpolate(progress.value, [0, 1], [0, 30]); // Moves right
+    const borderRadius = interpolate(progress.value, [0, 20], [0, 30]); // Smooth rounding
+
 
     return {
-      transform: [{ scale }, { translateX }],
+      transform: [{ scale }, { translateX }, { rotateZ: `${rotate}deg` }],
       borderRadius,
-      overflow: "hidden",
+      overflow: "visible"
     };
   });
 
